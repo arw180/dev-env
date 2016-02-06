@@ -31,7 +31,9 @@ sudo yum install openssl-devel curl-devel expat-devel gettext-devel zlib-devel p
 
 # create our directories
 mkdir -p $HOME/local $HOME/dev_tmp
-cp external/*.tar.gz $HOME/dev_tmp
+if [ "$DOWNLOAD" = false ] ; then
+    cp external/*.tar.gz $HOME/dev_tmp
+fi
 cd $HOME/dev_tmp
 
 #####################################################################
@@ -40,15 +42,15 @@ cd $HOME/dev_tmp
 
 # download source files
 if [ "$DOWNLOAD" = true ] ; then
-    wget -O libevent-${LIBEVENT_VERSION}.tar.gz https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
+    wget -O libevent-${LIBEVENT_VERSION}.tar.gz https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}-stable/libevent-${LIBEVENT_VERSION}-stable.tar.gz
 
     wget -O tmux-${TMUX_VERSION}.tar.gz https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
 
     wget -O ncurses-${NCURSES_VERSION}.tar.gz ftp://ftp.gnu.org/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz
 
-    wget -O zsh-${ZSH_VERSION}.tar.gz ftp://ftp.zsh.org/pub/zsh-5.2.tar.gz
+    wget -O zsh-${ZSH_VERSION}.tar.gz https://github.com/zsh-users/zsh/archive/zsh-${ZSH_VERSION}.tar.gz
 
-    wget -O vim-${VIM_VERSION}.tar.gz https://github.com/vim/vim/archive/v7.4.1265.tar.gz
+    wget -O vim-${VIM_VERSION}.tar.gz https://github.com/vim/vim/archive/v${VIM_VERSION}.tar.gz
 
     wget -O git-${GIT_VERSION}.tar.gz https://github.com/git/git/archive/v${GIT_VERSION}.tar.gz
 fi
@@ -57,7 +59,7 @@ fi
 #                           libevent
 #####################################################################
 tar xvzf libevent-${LIBEVENT_VERSION}.tar.gz
-cd libevent-${LIBEVENT_VERSION}
+cd libevent-${LIBEVENT_VERSION}-stable
 ./configure --prefix=$INSTALL_PATH --enable-shared
 make
 make install
