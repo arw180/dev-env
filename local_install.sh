@@ -27,7 +27,7 @@ TMP_DIR=$HOME/dev_tmp
 DEV_DIR=$HOME/dev-env
 # directory to store external packages. Don't change this without also changing
 # zshrc and tmux.conf
-EXT_DIR=$DEV_ENV/external
+EXT_DIR=$DEV_DIR/external
 
 # if true, download all packages from the interwebs
 DOWNLOAD=false
@@ -151,7 +151,7 @@ cd ..
 mkdir -p ~/.vim
 if [ "$DOWNLOAD" = true ] ; then
     mkdir -p ~/.vim/bundle
-    rm -rf ~/.vim/bundle
+    rm -rf ~/.vim/bundle/*
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 else
