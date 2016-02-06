@@ -150,6 +150,8 @@ cd ..
 # copy vim plugins
 mkdir -p ~/.vim
 if [ "$DOWNLOAD" = true ] ; then
+    mkdir -p ~/.vim/bundle
+    rm -rf ~/.vim/bundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 else
