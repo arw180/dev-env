@@ -39,6 +39,7 @@ sudo yum install gcc gcc-c++ unzip -y
 sudo yum install openssl-devel curl-devel expat-devel gettext-devel zlib-devel perl-ExtUtils-MakeMaker -y
 
 # create our directories
+rm -rf $TMP_DIR
 mkdir -p $INSTALL_PATH $TMP_DIR
 if [ "$DOWNLOAD" = false ] ; then
     cp external/*.tar.gz $TMP_DIR
