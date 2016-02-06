@@ -40,7 +40,7 @@ sudo yum install openssl-devel curl-devel expat-devel gettext-devel zlib-devel p
 
 # create our directories
 rm -rf $TMP_DIR
-mkdir -p $INSTALL_PATH $TMP_DIR
+mkdir -p $INSTALL_PATH $TMP_DIR $EXT_DIR
 if [ "$DOWNLOAD" = false ] ; then
     cp external/*.tar.gz $TMP_DIR
 fi
