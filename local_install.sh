@@ -162,12 +162,14 @@ fi
 #                           oh-my-zsh
 #####################################################################
 unzip oh-my-zsh.zip
+rm -rf $EXT_DIR/oh-my-zsh
 mv oh-my-zsh-master $EXT_DIR/oh-my-zsh
 
 #####################################################################
 #                          tmux-resurrect
 #####################################################################
 tar xzf tmux-resurrect-${TMUX_RESURRECT_VERSION}.tar.gz
+rm -rf $EXT_DIR/tmux-resurrect-${TMUX_RESURRECT_VERSION}
 mv tmux-resurrect-${TMUX_RESURRECT_VERSION} $EXT_DIR
 
 # cleanup
