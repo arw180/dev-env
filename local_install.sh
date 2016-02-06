@@ -17,24 +17,33 @@ NCURSES_VERSION=6.0
 ZSH_VERSION=5.2
 VIM_VERSION=7.4.1265
 GIT_VERSION=2.7.1
+TMUX_RESURRECT_VERSION=2.4.0
 
+# everything is install into here
 INSTALL_PATH=$HOME/local
+# temporary build directory (gets deleted)
+TMP_DIR=$HOME/dev_tmp
+# directory containing dev-env
+DEV_DIR=$HOME/dev-env
+# directory to store external packages. Don't change this without also changing
+# zshrc and tmux.conf
+EXT_DIR=$DEV_ENV/external
 
 # if true, download all packages from the interwebs
 DOWNLOAD=false
 
 # TODO: check if system is Centos - need Ubuntu commands as well
 # required for everything
-sudo yum install gcc gcc-c++ -y
+sudo yum install gcc gcc-c++ unzip -y
 # required for git
 sudo yum install openssl-devel curl-devel expat-devel gettext-devel zlib-devel perl-ExtUtils-MakeMaker -y
 
 # create our directories
-mkdir -p $HOME/local $HOME/dev_tmp
+mkdir -p $INSTALL_PATH $TMP_DIR
 if [ "$DOWNLOAD" = false ] ; then
-    cp external/*.tar.gz $HOME/dev_tmp
+    cp external/*.tar.gz $TMP_DIR
 fi
-cd $HOME/dev_tmp
+cd $TMP_DIR
 
 #####################################################################
 #                           Download
@@ -53,6 +62,10 @@ if [ "$DOWNLOAD" = true ] ; then
     wget -O vim-${VIM_VERSION}.tar.gz https://github.com/vim/vim/archive/v${VIM_VERSION}.tar.gz
 
     wget -O git-${GIT_VERSION}.tar.gz https://github.com/git/git/archive/v${GIT_VERSION}.tar.gz
+
+    wget -O oh-my-zsh.zip https://github.com/robbyrussell/oh-my-zsh/archive/master.zip
+
+    wget -O tmux-resurrect-${TMUX_RESURRECT_VERSION}.tar.gz https://github.com/tmux-plugins/tmux-resurrect/archive/v${TMUX_RESURRECT_VERSION}.tar.gz
 fi
 
 #####################################################################
@@ -99,7 +112,7 @@ export CPPFLAGS="-I$INSTALL_PATH/include -I$INSTALL_PATH/include/ncurses" LDFLAG
 #####################################################################
 tar xzvf vim-${VIM_VERSION}.tar.gz
 cd vim-${VIM_VERSION}
-./configure --prefix=$HOME/local
+./configure --prefix=$INSTALL_PATH
 make
 make install
 cd ..
@@ -129,13 +142,12 @@ cd ..
 #####################################################################
 tar xzf git-${GIT_VERSION}.tar.gz
 cd git-${GIT_VERSION}
-make prefix=$HOME/local all
-make prefix=$HOME/local install
+make prefix=$INSTALL_PATH all
+make prefix=$INSTALL_PATH install
 cd ..
 
 # copy vim plugins
 mkdir -p ~/.vim
-# install from Internet
 if [ "$DOWNLOAD" = true ] ; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
@@ -143,11 +155,23 @@ else
     tar xzvf vimbundle.tar.gz -C ~/.vim/
 fi
 
+#####################################################################
+#                           oh-my-zsh
+#####################################################################
+unzip oh-my-zsh.zip
+mv oh-my-zsh-master $EXT_DIR/oh-my-zsh
+
+#####################################################################
+#                          tmux-resurrect
+#####################################################################
+tar xzf tmux-resurrect-${TMUX_RESURRECT_VERSION}.tar.gz
+mv tmux-resurrect-${TMUX_RESURRECT_VERSION} $EXT_DIR
+
 # cleanup
-rm -rf $HOME/dev_tmp
+rm -rf $TMP_DIR
 
 # copy dot files
-cd $HOME/dev_env
+cd $DEV_DIR
 cp zshrc ~/.zshrc
 cp tmux.conf ~/.tmux.conf
 cp gitconfig ~/.gitconfig
@@ -155,7 +179,8 @@ cp vimrc ~/.vimrc
 
 # change default shell to zsh
 # first add zsh to /etc/shells
-sudo echo "$HOME/local/bin/zsh" | sudo tee -a /etc/shells
-chsh -s $HOME/local/bin/zsh
+sudo echo "$INSTALL_PATH/bin/zsh" | sudo tee -a /etc/shells
+# WARNING: don't want to do this more than once
+chsh -s $INSTALL_PATH/bin/zsh
 # load the shell
 zsh
