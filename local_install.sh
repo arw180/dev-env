@@ -58,7 +58,7 @@ if [ "$DOWNLOAD" = true ] ; then
 
     wget -O ncurses-${NCURSES_VERSION}.tar.gz ftp://ftp.gnu.org/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz
 
-    wget -O zsh-${ZSH_VERSION}.tar.gz https://github.com/zsh-users/zsh/archive/zsh-${ZSH_VERSION}.tar.gz
+    wget -O zsh-${ZSH_VERSION}.tar.gz http://sourceforge.net/projects/zsh/files/zsh/5.2/zsh-5.2.tar.gz/download
 
     wget -O vim-${VIM_VERSION}.tar.gz https://github.com/vim/vim/archive/v${VIM_VERSION}.tar.gz
 
