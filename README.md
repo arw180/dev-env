@@ -122,6 +122,9 @@ Use block mode: `ctrl-v`. highlight via normal nav. `shift-i + <char>`, `esc`
 Line comment (or multiple line comments in visual mode): `<leader>c<space>`
 toggles comment
 
+Vertical split: `:vsplit`
+Change between splits: `<ctrl-w> <ctrl-w>`
+
 Git:
 * `:Git <cmd>` (from vim-fugitive plugin) then any git command (including aliases)
 * `:Gblame:`: Git blame interactive vertical split
