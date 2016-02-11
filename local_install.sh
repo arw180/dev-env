@@ -43,6 +43,7 @@ rm -rf $TMP_DIR
 mkdir -p $INSTALL_PATH $TMP_DIR $EXT_DIR
 if [ "$DOWNLOAD" = false ] ; then
     cp external/*.tar.gz $TMP_DIR
+    cp external/*.zip $TMP_DIR
 fi
 cd $TMP_DIR
 
