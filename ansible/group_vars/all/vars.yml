@@ -1,5 +1,7 @@
 ---
 # build directory
 build_dir: /tmp
+# stow directory containing packages
+stow_dir: /usr/local/stow
 # if true, expect to find all files (minux yum repo stuff) in a tarball
 offline: false

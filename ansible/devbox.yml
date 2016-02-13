@@ -2,7 +2,7 @@
 - hosts: all
 
   roles:
-    - common
-    - stow
-    - ncurses
+      #- common
+      #- stow
+      #- ncurses
     - tmux

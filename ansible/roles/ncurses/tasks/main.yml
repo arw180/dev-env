@@ -24,6 +24,10 @@
   command: chdir={{ build_dir }}/libevent-{{ libevent_version }}-stable make install prefix=/usr/local/stow/libevent
   become: true
 
+- name: Stow libevent
+  command: chdir={{ stow_dir }} /usr/local/bin/stow libevent
+  become: true
+
 # Install ncurses
 - name: Download ncurses source
   when: not offline
@@ -47,4 +51,8 @@
 
 - name: Install ncurses
   command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} make install prefix=/usr/local/stow/ncurses
+  become: true
+
+- name: Stow ncurses
+  command: chdir={{ stow_dir }} /usr/local/bin/stow ncurses
   become: true
