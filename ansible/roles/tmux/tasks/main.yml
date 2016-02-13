@@ -1,0 +1,24 @@
+---
+- name: Download tmux source
+  when: not offline
+  get_url:
+    url: https://github.com/tmux/tmux/releases/download/{{ tmux_version }}/tmux-{{ tmux_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/tmux-{{ tmux_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure tmux
+  command: chdir={{ build_dir }}/tmux-{{ tmux_version }} ./configure --prefix=/usr/local CFLAGS='-I/usr/local/stow/ncurses/include/ncurses' CPPFLAGS='-I/usr/local/stow/ncurses/include/ncurses' LDFLAGS='-L/usr/local/stow/libevent/lib -L/usr/local/stow/ncurses/lib/ncurses'
+
+- name: Make tmux
+  command: chdir={{ build_dir }}/tmux-{{ tmux_version }} make
+
+- name: Install tmux
+  command: chdir={{ build_dir }}/tmux-{{ tmux_version }} make install prefix=/usr/local/stow/tmux
+  become: true
