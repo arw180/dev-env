@@ -1,0 +1,50 @@
+---
+# ncurses is dependent on libevent
+- name: Download libevent source
+  when: not offline
+  get_url:
+    url: https://github.com/libevent/libevent/releases/download/release-{{libevent_version}}-stable/libevent-{{ libevent_version }}-stable.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/libevent-{{ libevent_version }}-stable.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure libevent
+  command: chdir={{ build_dir }}/libevent-{{ libevent_version }}-stable ./configure --prefix=/usr/local --enable-shared
+
+- name: Make libevent
+  command: chdir={{ build_dir }}/libevent-{{ libevent_version }}-stable make PREFIX=/usr/local
+
+- name: Install libevent
+  command: chdir={{ build_dir }}/libevent-{{ libevent_version }}-stable make install prefix=/usr/local/stow/libevent
+  become: true
+
+# Install ncurses
+- name: Download ncurses source
+  when: not offline
+  get_url:
+    url: ftp://ftp.gnu.org/gnu/ncurses/ncurses-{{ ncurses_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/ncurses-{{ ncurses_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure ncurses
+  command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} ./configure --prefix=/usr/local --enable-shared CXXFLAGS='-fPIC' CFLAGS='-fPIC'
+
+- name: Make ncurses
+  command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} make PREFIX=/usr/local
+
+- name: Install ncurses
+  command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} make install prefix=/usr/local/stow/ncurses
+  become: true

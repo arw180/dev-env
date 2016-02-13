@@ -4,3 +4,4 @@
   roles:
     - common
     - stow
+    - ncurses
