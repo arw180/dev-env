@@ -1,0 +1,28 @@
+---
+- name: Download vim source
+  when: not offline
+  get_url:
+    url: https://github.com/vim/vim/archive/v{{ vim_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/vim-{{ vim_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure vim
+  command: chdir={{ build_dir }}/vim-{{ vim_version }} ./configure --prefix=/usr/local
+
+- name: Make vim
+  command: chdir={{ build_dir }}/vim-{{ vim_version }} make
+
+- name: Install vim
+  command: chdir={{ build_dir }}/vim-{{ vim_version }} make install prefix=/usr/local/stow/vim
+  become: true
+
+- name: Stow vim
+  command: chdir={{ stow_dir }} /usr/local/bin/stow vim
+  become: true
