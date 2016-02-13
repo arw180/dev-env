@@ -1,0 +1,24 @@
+---
+- name: Download stow source
+  when: not offline
+  get_url:
+    url: http://ftp.gnu.org/gnu/stow/stow-latest.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/stow-latest.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure Stow
+  command: chdir={{ build_dir }}/stow-{{ stow_version }} ./configure --prefix=/usr/local
+
+- name: Make stow
+  command: chdir={{ build_dir }}/stow-{{ stow_version }} make
+
+- name: Install stow
+  command: chdir={{ build_dir }}/stow-{{ stow_version }} make install
+  become: true

@@ -1,0 +1,29 @@
+---
+# Install dependencies
+- name: Install dependencies
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - gcc
+      - gcc-c++
+      - unzip
+  become: true
+
+
+- name: Install dependencies required to build git
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - openssl-devel
+      - curl-devel
+      - expat-devel
+      - gettext-devel
+      - zlib-devel
+      - perl-ExtUtils-MakeMaker
+  become: true
+
+
+      # required for git
+      # sudo yum install openssl-devel curl-devel expat-devel gettext-devel zlib-devel perl-ExtUtils-MakeMaker -y

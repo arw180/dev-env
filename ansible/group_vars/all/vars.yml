@@ -1,0 +1,5 @@
+---
+# build directory
+build_dir: /tmp
+# if true, expect to find all files (minux yum repo stuff) in a tarball
+offline: false
