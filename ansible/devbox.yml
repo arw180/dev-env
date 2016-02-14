@@ -6,6 +6,7 @@
       #- stow
       #- ncurses
       #- tmux
-      - vim
+      #- vim
       #- zsh
       #- git
+    - dotfiles

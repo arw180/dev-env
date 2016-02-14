@@ -27,6 +27,19 @@
   command: chdir={{ stow_dir }} /usr/local/bin/stow zsh
   become: true
 
+- name: Add zsh to /etc/shells
+  lineinfile:
+    line: "{{ stow_dir }}/zsh/bin/zsh"
+    state: present
+    dest: /etc/shells
+  become: true
+
+- name: Change default shell
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: "{{ stow_dir }}/zsh/bin/zsh"
+  become: true
+
 - name: Download oh-my-zsh
   when: not offline
   get_url:

@@ -1,0 +1,25 @@
+---
+- name: Clone dotfiles
+  git:
+    repo: https://github.com/arw180/dotfiles.git
+    dest: ~/dotfiles
+
+- name: Stow dotfiles for git
+  shell: /usr/local/bin/stow git
+  args:
+    chdir: ~/dotfiles
+
+- name: Stow dotfiles for vim
+  shell: /usr/local/bin/stow vim
+  args:
+    chdir: ~/dotfiles
+
+- name: Stow dotfiles for tmux
+  shell: /usr/local/bin/stow tmux
+  args:
+    chdir: ~/dotfiles
+
+- name: Stow dotfiles for zsh
+  shell: /usr/local/bin/stow zsh
+  args:
+    chdir: ~/dotfiles
