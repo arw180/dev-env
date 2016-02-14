@@ -23,3 +23,8 @@
   shell: /usr/local/bin/stow zsh
   args:
     chdir: ~/dotfiles
+
+- name: Stow dotfiles for bash
+  shell: /usr/local/bin/stow bash
+  args:
+    chdir: ~/dotfiles
