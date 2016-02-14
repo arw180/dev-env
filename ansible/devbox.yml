@@ -2,11 +2,11 @@
 - hosts: all
 
   roles:
-      #- common
-      #- stow
-      #- ncurses
-      #- tmux
-      #- vim
-      #- zsh
-      #- git
+    - common
+    - stow
+    - ncurses
+    - tmux
+    - git
+    - vim
+    - zsh
     - dotfiles
