@@ -44,7 +44,7 @@
     copy: no
 
 - name: Configure ncurses
-  command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} ./configure --prefix=/usr/local --enable-shared CXXFLAGS='-fPIC' CFLAGS='-fPIC'
+  command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} ./configure --prefix=/usr/local --enable-shared CXXFLAGS='-fPIC' CFLAGS='-fPIC' --enable-widec
 
 - name: Make ncurses
   command: chdir={{ build_dir }}/ncurses-{{ ncurses_version }} make PREFIX=/usr/local

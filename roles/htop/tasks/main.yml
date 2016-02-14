@@ -1,0 +1,28 @@
+---
+- name: Download htop source
+  when: not offline
+  get_url:
+    url: http://hisham.hm/htop/releases/{{ htop_version }}/htop-{{ htop_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/htop-{{ htop_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure htop
+  command: chdir={{ build_dir }}/htop-{{ htop_version }} ./configure --prefix=/usr/local CFLAGS='-I/usr/local/include' CPPFLAGS='-I/usr/local/include/ncurses' LDFLAGS='-L/usr/local/lib'
+
+- name: Make htop
+  command: chdir={{ build_dir }}/htop-{{ htop_version }} make
+
+- name: Install htop
+  command: chdir={{ build_dir }}/htop-{{ htop_version }} make install prefix={{ stow_dir }}/htop
+  become: true
+
+- name: Stow htop
+  command: chdir={{ stow_dir }} /usr/local/bin/stow htop
+  become: true
