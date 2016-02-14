@@ -31,3 +31,21 @@
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
+    force: yes
+
+# manually clone any other vim plugins that are required for the install to
+# pass without warnings
+- name: Clone Rainbow Parenthesis
+  git:
+    repo: https://github.com/kien/rainbow_parentheses.vim.git
+    dest: ~/.vim/bundle/rainbow_parentheses.vim
+    force: yes
+
+- name: Clone Solarized
+  git:
+    repo: https://github.com/altercation/vim-colors-solarized.git
+    dest: ~/.vim/bundle/vim-colors-solarized
+    force: yes
+
+- name: Install vim plugins
+  shell: vim +PluginInstall +qall

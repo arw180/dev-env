@@ -27,12 +27,13 @@
 
 - name: Add stow libs to ldconfig
   copy:
-   src: ld.conf
-   dest: /etc/ld.so.conf.d/stow.conf
-   owner: root
-   mode: 0644
+    src: ld.conf
+    dest: /etc/ld.so.conf.d/stow.conf
+    owner: root
+    mode: 0644
   become: true
 
+# TODO: may need to run this after installing other libraries
 - name: Reload ldconfig
   command: /sbin/ldconfig
   become: true

@@ -1,0 +1,4 @@
+---
+- name: Reload ldconfig
+  command: /sbin/ldconfig
+  become: true

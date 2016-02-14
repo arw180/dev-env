@@ -2,12 +2,13 @@
 - hosts: all
 
   roles:
-      - common
-      - stow
-      - ncurses
-      - tmux
-      - git
-      - vim
-      - zsh
-      - htop
-      - dotfiles
+    - common
+    - stow
+    - ncurses
+    - tmux
+    - git
+    - dotfiles
+    - vim
+    - zsh
+    - htop
+    - ldconfig
