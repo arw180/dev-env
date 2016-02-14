@@ -1,2 +1,3 @@
 ---
 tmux_version: 2.1
+tmux_resurrect_version: 2.4.0

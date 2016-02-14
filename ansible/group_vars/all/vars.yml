@@ -3,5 +3,8 @@
 build_dir: /tmp
 # stow directory containing packages
 stow_dir: /usr/local/stow
+# dev-env dir
+local_home: "{{ ansible_env.HOME }}"
+devenv_dir: "{{ local_home }}/dev-env"
 # if true, expect to find all files (minux yum repo stuff) in a tarball
 offline: false

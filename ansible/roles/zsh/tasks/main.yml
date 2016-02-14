@@ -1,0 +1,42 @@
+---
+- name: Download zsh source
+  when: not offline
+  get_url:
+    url: http://sourceforge.net/projects/zsh/files/zsh/{{ zsh_version }}/zsh-{{ zsh_version }}.tar.gz/download
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/zsh-{{ zsh_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure zsh
+  command: chdir={{ build_dir }}/zsh-{{ zsh_version }} ./configure --prefix=/usr/local
+
+- name: Make zsh
+  command: chdir={{ build_dir }}/zsh-{{ zsh_version }} make
+
+- name: Install zsh
+  command: chdir={{ build_dir }}/zsh-{{ zsh_version }} make install prefix=/usr/local/stow/zsh
+  become: true
+
+- name: Stow zsh
+  command: chdir={{ stow_dir }} /usr/local/bin/stow zsh
+  become: true
+
+- name: Download oh-my-zsh
+  when: not offline
+  get_url:
+    url: https://github.com/robbyrussell/oh-my-zsh/archive/master.zip
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/oh-my-zsh-master.zip"
+    dest: "{{ devenv_dir }}"
+    copy: no

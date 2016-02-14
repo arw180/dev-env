@@ -37,5 +37,7 @@
   command: /sbin/ldconfig
   become: true
 
-# todo: add /usr/local/lib and /usr/local/lib64 to /etc/ld.so.conf.d/dev-env.conf
-#  then run ldconfig (see postgres_build task)
+- name: Create dev-env
+  file:
+    path: "{{ devenv_dir }}"
+    state: directory

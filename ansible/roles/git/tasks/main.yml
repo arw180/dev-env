@@ -1,0 +1,25 @@
+---
+- name: Download git source
+  when: not offline
+  get_url:
+    url: https://github.com/git/git/archive/v{{ git_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/git-{{ git_version }}.tar.gz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Make git
+  command: chdir={{ build_dir }}/git-{{ git_version }} make prefix=/usr/local all
+
+- name: Install make
+  command: chdir={{ build_dir }}/git-{{ git_version }} make install prefix=/usr/local/stow/git prefix=/usr/local/stow/git
+  become: true
+
+- name: Stow git
+  command: chdir={{ stow_dir }} /usr/local/bin/stow git
+  become: true

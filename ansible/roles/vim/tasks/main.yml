@@ -26,3 +26,8 @@
 - name: Stow vim
   command: chdir={{ stow_dir }} /usr/local/bin/stow vim
   become: true
+
+- name: Clone Vundle
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: ~/.vim/bundle/Vundle.vim

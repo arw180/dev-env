@@ -26,3 +26,17 @@
 - name: Stow tmux
   command: chdir={{ stow_dir }} /usr/local/bin/stow tmux
   become: true
+
+- name: Download tmux resurrect
+  when: not offline
+  get_url:
+    url: https://github.com/tmux-plugins/tmux-resurrect/archive/v{{ tmux_resurrect_version }}.tar.gz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/tmux-resurrect-{{ tmux_resurrect_version }}.tar.gz"
+    dest: "{{ devenv_dir }}"
+    copy: no
