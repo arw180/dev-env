@@ -3,9 +3,19 @@ Development Environment
 Ansible scripts to configure a box with a development environment based on
 vim, tmux, and zsh
 
+Tested on: Centos 6.7, Amazon Linux AMI (EC2) instance
+
 # Usage
 Install ansible on the host and run:
- `ansible-playbook devbox.yml -i hosts_vagrant -u vagrant -k` (for example)
+* `ansible-playbook devbox.yml -i hosts_vagrant -u vagrant -k`
+* `ansible-playbook devbox.yml -i hosts_aws -u ec2 --private-key=</path/to/private/key.pem>`
+
+NOTE: for EC2 boxes, uses the public IP in the hosts file, not the domain name.
+The domain names are usually too long and cause Ansible to vommit.
+
+If you're using Vagrant and have more than one Vagrant box running, you will
+need to change the port number in `hosts_vagrant` to the port being forwarded
+to that particular vagrant instance
 
 # Offline Install
 By setting `package_env: true` in `group_vars/all/vars.yml`, the downloaded
