@@ -3,8 +3,14 @@ Development Environment
 Ansible scripts to configure a box with a development environment based on
 vim, tmux, and zsh
 
-Tested on: Centos 6.7, Amazon Linux AMI (EC2 instance), Amazon Red Hat 7.2
-(EC2 instance), Amazon Ubuntu Server 14.04 LTS (EC2 instance)
+Tested on:
+* Centos 6.7 (Vagrant)
+* Amazon Linux AMI (EC2 instance, RHEL 5/6 based)
+* Amazon Red Hat 7.2 (EC2 instance)
+* Amazon Ubuntu Server 14.04 LTS (EC2 instance)
+
+If you are forced to use PuTTY to get a terminal to your box, you'll want to
+revert to `bash` for your shell
 
 # Usage
 Install ansible on the host and run something like:
