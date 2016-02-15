@@ -1,6 +1,7 @@
 ---
 # Install dependencies
 - name: Install dependencies
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   yum:
     name: "{{ item }}"
     state: present
@@ -10,8 +11,21 @@
       - unzip
   become: true
 
+- name: Install dependencies
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - gcc
+      - g++
+      - unzip
+      - make
+  become: true
+
 
 - name: Install dependencies required to build git
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   yum:
     name: "{{ item }}"
     state: present
@@ -24,6 +38,30 @@
       - perl-ExtUtils-MakeMaker
       - libselinux-python # required for ansible
   become: true
+
+- name: Install dependencies required to build git
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - openssl
+      - libssl-dev
+      - libcurl4-gnutls-dev
+      - libexpat1-dev
+      - gettext
+      - zlib1g-dev
+        #- perl-ExtUtils-MakeMaker
+      - python-selinux # required for ansible
+  become: true
+
+- name: Install ncurses-dev if on Ubuntu - not sure why this must be done
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - libncurses-dev
 
 - name: Add stow libs to ldconfig
   copy:
