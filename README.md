@@ -37,12 +37,14 @@ Complete tools list:
 * tmux (w/ tmux-resurrect)
 * zsh (w/ oh-my-zsh)
 * htop
-* stow
+* GNU stow
 
-* GNU Stow is used to install the applications above into `/usr/local/stow`, thus
+GNU Stow is used to install the applications above into `/usr/local/stow`, thus
 keeping them separated from system installs.
-* `~/dev-env` contains supporting resources such as oh-my-zsh plugins and
+
+`~/dev-env` contains supporting resources such as oh-my-zsh plugins and
     tmux-resurrect
-* `sudo` access to the target box is required (for yum installs of
+
+`sudo` access to the target box is required (for yum installs of
 some dependencies and using `/usr/local/stow` as the stow directory)
 
