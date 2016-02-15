@@ -2,8 +2,8 @@
 - hosts: all
 
   roles:
-    - {role: offline, when: offline}
     - common
+    - {role: offline, when: offline}
     - stow
     - ncurses
     - tmux

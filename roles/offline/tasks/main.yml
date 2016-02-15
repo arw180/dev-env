@@ -8,7 +8,6 @@
 
 - name: Unarchive files for offline installation
   when: offline
-  unarchive:
-    src: "{{ build_dir }}/dev-env.tar.gz"
-    dest: "{{ build_dir }}"
-    copy: no
+  shell: tar xzf dev-env.tar.gz --strip 1
+  args:
+    chdir: "{{ build_dir }}"

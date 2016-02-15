@@ -12,9 +12,14 @@
 
 - name: copy vim bundles
   shell: cp -r {{ local_home }}/.vim {{ build_dir }}/dev-env
-  become: true
 
 - name: create archive and place in {{ devenv_dir }}
-  shell: tar czf dev-env.tar.gz {{ build_dir }}/dev-env
+  shell: tar czf dev-env.tar.gz dev-env; mv dev-env.tar.gz {{ devenv_dir }}
   args:
-    chdir: "{{ devenv_dir }}"
+    chdir: "{{ build_dir }}"
+
+- name: cleanup
+  file:
+    path: "{{ build_dir }}/dev-env"
+    state: absent
+  become: true

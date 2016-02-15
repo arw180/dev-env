@@ -54,6 +54,7 @@
   file:
     path: ~/.vim/after/ftplugin
     recurse: true
+    state: directory
 
 - name: Get yaml settings
   copy:
