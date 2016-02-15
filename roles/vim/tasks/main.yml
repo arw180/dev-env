@@ -49,3 +49,14 @@
 
 - name: Install vim plugins
   shell: vim +PluginInstall +qall
+
+- name: Create ftplugin directories
+  file:
+    path: ~/.vim/after/ftplugin
+    recurse: true
+
+- name: Get yaml settings
+  copy:
+    src: "yaml.vim"
+    dest: ~/.vim/after/ftplugin/yaml.vim
+    force: yes

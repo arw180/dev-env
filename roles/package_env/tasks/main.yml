@@ -1,0 +1,20 @@
+---
+- name: create package directory
+  file:
+    path: "{{ build_dir }}/dev-env"
+    state: directory
+
+- name: copy all tars
+  shell: cp {{ build_dir }}/*.tar.gz {{ build_dir }}/dev-env
+
+- name: copy all zips
+  shell: cp {{ build_dir }}/*.zip {{ build_dir }}/dev-env
+
+- name: copy vim bundles
+  shell: cp -r {{ local_home }}/.vim {{ build_dir }}/dev-env
+  become: true
+
+- name: create archive and place in {{ devenv_dir }}
+  shell: tar czf dev-env.tar.gz {{ build_dir }}/dev-env
+  args:
+    chdir: "{{ devenv_dir }}"

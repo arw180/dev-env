@@ -2,6 +2,7 @@
 - hosts: all
 
   roles:
+    - {role: offline, when: offline}
     - common
     - stow
     - ncurses
@@ -12,3 +13,4 @@
     - zsh
     - htop
     - ldconfig
+    - {role: package_env, when: create_package}
