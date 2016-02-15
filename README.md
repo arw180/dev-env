@@ -32,14 +32,10 @@ case.
 
 # Details
 Complete tools list:
-
 * git
-* vim
- * Vundle
-* tmux
- * tmux-resurrect
-* zsh
- * oh-my-zsh
+* vim (w/ Vundle)
+* tmux (w/ tmux-resurrect)
+* zsh (w/ oh-my-zsh)
 * htop
 * stow
 
