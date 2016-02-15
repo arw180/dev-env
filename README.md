@@ -8,7 +8,7 @@ Tested on: Centos 6.7, Amazon Linux AMI (EC2) instance
 # Usage
 Install ansible on the host and run something like:
 * `ansible-playbook devbox.yml -i hosts_vagrant -u vagrant -k`, or
-* `ansible-playbook devbox.yml -i hosts_aws -u ec2 --private-key=</path/to/private/key.pem>`
+* `ansible-playbook devbox.yml -i hosts_aws -u ec2-user --private-key=</path/to/private/key.pem>`
 
 NOTE: for EC2 boxes, uses the public IP in the hosts file, not the domain name.
 The domain names are usually too long and cause Ansible to vommit.
