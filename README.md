@@ -6,8 +6,8 @@ vim, tmux, and zsh
 Tested on: Centos 6.7, Amazon Linux AMI (EC2) instance
 
 # Usage
-Install ansible on the host and run:
-* `ansible-playbook devbox.yml -i hosts_vagrant -u vagrant -k`
+Install ansible on the host and run something like:
+* `ansible-playbook devbox.yml -i hosts_vagrant -u vagrant -k`, or
 * `ansible-playbook devbox.yml -i hosts_aws -u ec2 --private-key=</path/to/private/key.pem>`
 
 NOTE: for EC2 boxes, uses the public IP in the hosts file, not the domain name.
