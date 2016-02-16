@@ -13,6 +13,15 @@
 - name: copy vim bundles
   shell: cp -r {{ local_home }}/.vim {{ build_dir }}/dev-env
 
+- name: copy dotfiles
+  command: cp -r ~/dotfiles {{ build_dir }}/dev-env/
+
+- name: copy this repo (dev-env)
+  when: not offline
+  git:
+    repo: https://github.com/arw180/dev-env.git
+    dest: "{{ build_dir }}/dev-env"
+
 - name: create archive and place in {{ devenv_dir }}
   shell: tar czf dev-env.tar.gz dev-env; mv dev-env.tar.gz {{ devenv_dir }}
   args:
