@@ -65,3 +65,14 @@ keeping them separated from system installs.
 `sudo` access to the target box is required (for yum installs of
 some dependencies and using `/usr/local/stow` as the stow directory)
 
+# OS X Setup
+
+## iterm2
+* `Command-?`: locate current cursor position
+* other features: instant replay, regex search, click to open urls, and jump to mark features
+* loading solarized colors into iterm2: https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
+
+## key-bindings
+* map caps lock to control: http://www.emacswiki.org/emacs/MovingTheCtrlKey
+* bring iTerm2 forward to the front-most window (in Preferences-Keys, set as Option-t)
+* uncheck the iTerm2 bell sound in Profiles->Terminals->notifications
