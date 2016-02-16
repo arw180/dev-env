@@ -26,10 +26,11 @@ to that particular vagrant instance
 
 # Offline Install
 By setting `package_env: true` in `group_vars/all/vars.yml`, the downloaded
-source tarballs and vim plugin bundles (contents of `~/.vim`) will be copied
-and archived in `~/dev-env/dev-env.tar.gz`. That tarball (along with this
+source tarballs, vim plugin bundles (contents of `~/.vim`), and
+dotfiles github repository will be copied
+and archived in `~/dev-env/offline-files.tar.gz`. That tarball (along with this
 repository) can then be used to install the development environment on a box
-without Internet access by setting `offline: true` and copying `dev-env.tar.gz`
+without Internet access by setting `offline: true` and copying `offline-files.tar.gz`
 to `roles/offline/files`. Note that the box must have access to a local yum
 mirror to install dependencies. The box must also have Ansible installed.
 

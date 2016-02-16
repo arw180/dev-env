@@ -2,12 +2,12 @@
 - name: Copy files for offline installation
   when: offline
   copy:
-    src: dev-env.tar.gz
+    src: offline-files.tar.gz
     dest: "{{ build_dir }}"
     force: yes
 
 - name: Unarchive files for offline installation
   when: offline
-  shell: tar xzf dev-env.tar.gz --strip 1
+  shell: tar xzf offline-files.tar.gz --strip 1
   args:
     chdir: "{{ build_dir }}"

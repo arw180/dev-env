@@ -23,7 +23,7 @@
     dest: "{{ build_dir }}/dev-env"
 
 - name: create archive and place in {{ devenv_dir }}
-  shell: tar czf dev-env.tar.gz dev-env; mv dev-env.tar.gz {{ devenv_dir }}
+  shell: tar czf offline-files.tar.gz dev-env; mv offline-files.tar.gz {{ devenv_dir }}
   args:
     chdir: "{{ build_dir }}"
 
