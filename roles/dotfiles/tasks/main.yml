@@ -1,6 +1,6 @@
 ---
 - name: Clone dotfiles
-  when: not offliine
+  when: not offline
   git:
     repo: https://github.com/arw180/dotfiles.git
     dest: ~/dotfiles

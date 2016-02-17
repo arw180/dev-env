@@ -12,15 +12,21 @@
 
 - name: copy vim bundles
   shell: cp -r {{ local_home }}/.vim {{ build_dir }}/dev-env
+  become: true
+
+- name: remove .git directories from vim bundles (some are write protected and
+        cause copying to fail)
+  shell: find {{ build_dir }}/dev-env/.vim  -type d -name "*.git" | xargs rm -rf
+  become: true
 
 - name: copy dotfiles
-  command: cp -r ~/dotfiles {{ build_dir }}/dev-env/
+  shell: cp -r {{ local_home }}/dotfiles {{ build_dir }}/dev-env/
+  become: true
 
-- name: copy this repo (dev-env)
-  when: not offline
-  git:
-    repo: https://github.com/arw180/dev-env.git
-    dest: "{{ build_dir }}/dev-env"
+- name: remove .git directories from dotfiles (some are write protected and
+        cause copying to fail)
+  shell: find {{ build_dir }}/dev-env/dotfiles  -type d -name "*.git" | xargs rm -rf
+  become: true
 
 - name: create archive and place in {{ devenv_dir }}
   shell: tar czf offline-files.tar.gz dev-env; mv offline-files.tar.gz {{ devenv_dir }}
