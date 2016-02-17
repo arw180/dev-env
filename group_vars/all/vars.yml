@@ -7,6 +7,6 @@ stow_dir: /usr/local/stow
 local_home: "{{ ansible_env.HOME }}"
 devenv_dir: "{{ local_home }}/dev-env"
 # if true, expect to find all files (minux yum repo stuff) in a tarball
-offline: true
+offline: false
 # if true, create a tarball that could be used to feed an offline install
-create_package: false
+create_package: true
