@@ -8,9 +8,9 @@
     - ncurses
     - tmux
     - git
-    - dotfiles
     - vim
     - zsh
     - htop
     - ldconfig
+    - dotfiles
     - {role: package_env, when: create_package}

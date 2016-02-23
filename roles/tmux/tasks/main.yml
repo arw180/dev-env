@@ -14,7 +14,7 @@
     copy: no
 
 - name: Configure tmux
-  command: chdir={{ build_dir }}/tmux-{{ tmux_version }} ./configure --prefix=/usr/local CFLAGS='-I/usr/local/include' CPPFLAGS='-I/usr/local/include/ncurses' LDFLAGS='-L/usr/local/lib'
+  command: chdir={{ build_dir }}/tmux-{{ tmux_version }} ./configure --prefix=/usr/local CFLAGS='-I/usr/local/include' CPPFLAGS='-I/usr/local/stow/ncurses/include/ncurses' LDFLAGS='-L/usr/local/lib'
 
 - name: Make tmux
   command: chdir={{ build_dir }}/tmux-{{ tmux_version }} make

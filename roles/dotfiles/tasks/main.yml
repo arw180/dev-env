@@ -3,33 +3,33 @@
   when: not offline
   git:
     repo: https://github.com/arw180/dotfiles.git
-    dest: ~/dotfiles
+    dest: "{{ local_home }}/dotfiles"
 
 - name: If offline, copy dotfiles
   when: offline
-  command: cp -r {{ build_dir }}/dotfiles ~/
+  command: cp -r {{ build_dir }}/dotfiles {{ local_home }}/
 
 - name: Stow dotfiles for git
   shell: /usr/local/bin/stow git
   args:
-    chdir: ~/dotfiles
+    chdir: "{{ local_home }}/dotfiles"
 
 - name: Stow dotfiles for vim
   shell: /usr/local/bin/stow vim
   args:
-    chdir: ~/dotfiles
+    chdir: "{{ local_home }}/dotfiles"
 
 - name: Stow dotfiles for tmux
   shell: /usr/local/bin/stow tmux
   args:
-    chdir: ~/dotfiles
+    chdir: "{{ local_home }}/dotfiles"
 
 - name: Stow dotfiles for zsh
   shell: /usr/local/bin/stow zsh
   args:
-    chdir: ~/dotfiles
+    chdir: "{{ local_home }}/dotfiles"
 
 #- name: Stow dotfiles for bash
 #  shell: /usr/local/bin/stow bash
 #  args:
-#    chdir: ~/dotfiles
+#    chdir: "{{ local_home }}/dotfiles"
