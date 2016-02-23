@@ -1,0 +1,5 @@
+---
+# NOTE: This must happen after the vimrc file is in place
+- name: Install vim plugins
+  when: not offline
+  shell: vim +PluginInstall +qall

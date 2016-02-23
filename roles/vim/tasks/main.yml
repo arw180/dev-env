@@ -50,12 +50,23 @@
     dest: "{{ local_home }}/.vim/bundle/vim-colors-solarized"
     force: yes
 
+- name: Clone syntastic
+  when: not offline
+  git:
+    repo: https://github.com/scrooloose/syntastic
+    dest: "{{ local_home }}/.vim/bundle/syntastic"
+    force: yes
+
+# NOTE: This must happen after the vimrc file is in place
 - name: Install vim plugins
   when: not offline
   shell: vim +PluginInstall +qall
 
+- name: Extract .vim directory from offline files
+  when: offline
+  shell: cp -r {{ build_dir }}/.vim {{ local_home }}
+
 - name: Create ftplugin directories
-  when: not offline
   file:
     path: "{{ local_home }}/.vim/after/ftplugin"
     recurse: true

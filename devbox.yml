@@ -13,4 +13,5 @@
     - htop
     - ldconfig
     - dotfiles
+    - post_dotfiles
     - {role: package_env, when: create_package}
