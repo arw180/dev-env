@@ -77,3 +77,9 @@
     src: "yaml.vim"
     dest: "{{ local_home }}/.vim/after/ftplugin/yaml.vim"
     force: yes
+
+- name: Get javascript settings
+  copy:
+    src: "javascript.vim"
+    dest: "{{ local_home }}/.vim/after/ftplugin/javascript.vim"
+    force: yes
