@@ -1,0 +1,30 @@
+---
+- name: Download python source
+  when: not offline
+  get_url:
+    url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version}}.tgz
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: Extract archive
+  unarchive:
+    src: "{{ build_dir }}/Python-{{ python_version }}.tgz"
+    dest: "{{ build_dir }}"
+    copy: no
+
+- name: Configure Python
+  command: chdir={{ build_dir }}/Python-{{ python_version }} ./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+
+- name: Make python
+  command: chdir={{ build_dir }}/Python-{{ python_version }} make
+
+# Install python to /usr/local
+- name: Install python
+  command: chdir={{ build_dir }}/Python-{{ python_version }} make altinstall prefix=/usr/local/stow/python
+  become: true
+
+- name: Stow python
+  command: chdir={{ stow_dir }} /usr/local/bin/stow python
+  become: true
+
