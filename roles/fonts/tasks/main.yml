@@ -1,0 +1,8 @@
+---
+- name: Download fonts
+  when: not offline
+  get_url:
+    url: https://github.com/powerline/fonts/archive/2015-12-04.tar.gz
+    dest: "{{ build_dir }}/patched-fonts.tar.gz"
+    mode: 0644
+    validate_certs: no

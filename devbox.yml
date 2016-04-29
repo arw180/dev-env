@@ -9,9 +9,11 @@
     - tmux
     - git
     - vim
+    - python_3
     - zsh
     - htop
     - ldconfig
+    - fonts
     - dotfiles
     - post_dotfiles
     - {role: package_env, when: create_package}
