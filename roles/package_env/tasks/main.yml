@@ -7,6 +7,9 @@
 - name: copy all tars
   shell: cp {{ build_dir }}/*.tar.gz {{ build_dir }}/dev-env
 
+- name: copy all tgz
+  shell: cp {{ build_dir }}/*.tgz {{ build_dir }}/dev-env
+
 - name: copy all zips
   shell: cp {{ build_dir }}/*.zip {{ build_dir }}/dev-env
 
