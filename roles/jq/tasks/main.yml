@@ -1,0 +1,18 @@
+---
+- name: download jq (utility for formatting and manipulating JavaScript from cmd line
+  when: not offline
+  get_url:
+    url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+    dest: "{{ build_dir }}"
+    mode: 0644
+    validate_certs: no
+
+- name: copy jq to /usr/local/bin
+  command: cp {{ build_dir }}/jq-linux64 /usr/local/bin/jq
+  become: true
+
+- name: fix permissions on jq binary
+  file:
+    path: /usr/local/bin/jq
+    mode: u=rwx,g=xr,o=rx
+  become: true

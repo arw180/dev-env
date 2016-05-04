@@ -17,6 +17,10 @@
   shell: cp -r {{ local_home }}/.vim {{ build_dir }}/dev-env
   become: true
 
+- name: copy jq
+  shell: cp {{ build_dir }}/jq-linux64 {{ build_dir }}/dev-env
+  become: true
+
 - name: remove .git directories from vim bundles (some are write protected and
         cause copying to fail)
   shell: find {{ build_dir }}/dev-env/.vim  -type d -name "*.git" | xargs rm -rf

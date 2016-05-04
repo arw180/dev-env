@@ -9,6 +9,7 @@
       - gcc
       - gcc-c++
       - unzip
+      - libxml2
   become: true
 
 - name: Install dependencies
