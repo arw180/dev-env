@@ -1,4 +1,23 @@
 ---
+# Install dependencies
+- name: Install dependencies
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Amazon' or ansible_distribution == 'RedHat'
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - zlib-dev
+      - openssl-devel
+      - sqlite-devel
+      - bzip2-devel
+  become: true
+
+- name: install the 'Development tools' package group
+  yum: name="@Development tools" state=present
+  become: true
+
+# TODO: Add the above for ubuntu
+
 - name: Download python source
   when: not offline
   get_url:
