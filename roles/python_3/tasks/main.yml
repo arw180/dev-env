@@ -6,7 +6,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-      - zlib-dev
+      - zlib-devel
       - openssl-devel
       - sqlite-devel
       - bzip2-devel
