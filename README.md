@@ -1,4 +1,4 @@
-Development Environment
+Development Environment (deprecated after discovering Spacemacs)
 ===========================
 Ansible scripts to configure a box with a development environment based on
 vim, tmux, and zsh
